@@ -3,5 +3,5 @@
     - name: mkdir conf dir /etc/kubenetes
       file:
         path=/etc/kubenetes
-        state=dictionary
+        state=directory
         

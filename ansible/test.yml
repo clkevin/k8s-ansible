@@ -1,7 +1,11 @@
 ---
-- hosts: k8s-master
+- hosts: k8s-build
   tasks: 
     - name: make dir binaries
       file:
         path=~/k8s-ansible/binaries
-        state=dictionary
+        state=directory
+    - name: tem
+      template: 
+        src: test.j2
+        dest: test2.conf

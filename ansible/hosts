@@ -1,5 +1,12 @@
+
+
+# build节点
+[k8s-build]
+K8s-master a=12345
+
+
 # master节点
-[k8s-master]
+[k8s-masters]
 k8s-master
 
 # node 节点

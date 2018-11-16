@@ -29,6 +29,17 @@
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
     
+    - name: cp master binaries to master /usr/bin
+      cp: 
+        src:~/k8s-ansible/binaries/master
+	desc:/usr/bin
+    - name: cp conf to /etc/kubenetes
+
+    - name: cp systemctl service
+
+    - name: start service
+
+    - name: enable service
 
 
 
