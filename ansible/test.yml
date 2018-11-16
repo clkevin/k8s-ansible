@@ -6,6 +6,6 @@
         path=~/k8s-ansible/binaries
         state=directory
     - name: tem
-      template: 
+      copy: 
         src: test.j2
-        dest: test2.conf
+        dest: ~/test2.conf

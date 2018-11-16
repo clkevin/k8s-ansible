@@ -28,7 +28,19 @@
         - {service: 'kubectl'}
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
-    
+    - name: produce apiserver conf
+      template: 
+        src: ~/k8s-ansible/template/apiserver.j2
+        dest: ~/k8s-ansible/template/master/apiserver
+    - name: produce controller-manager conf
+      template: 
+        src: ~/k8s-ansible/template/controller-manager.j2
+        dest: ~/k8s-ansible/template/master/controller-manager
+    - name: produce scheduler conf
+      template: 
+        src: ~/k8s-ansible/template/scheduler.j2
+        dest: ~/k8s-ansible/template/master/scheduler
+
 
 
 
