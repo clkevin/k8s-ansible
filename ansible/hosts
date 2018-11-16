@@ -1,0 +1,7 @@
+# master节点
+[k8s-master]
+k8s-master
+
+# node 节点
+[k8s-nodes]
+k8s-node[1:3]

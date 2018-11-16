@@ -1,0 +1,7 @@
+- host:all
+  task:
+    - name: mkdir conf dir /etc/kubenetes
+      file:
+        path=/etc/kubenetes
+        state=dictionary
+        

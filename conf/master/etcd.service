@@ -1,0 +1,15 @@
+
+
+[Unit]
+Description=Etcd Server
+After=network.target
+
+[Service]
+Type=simple
+# etcd 数据存储目录
+WorkingDirectory=/var/lib/etcd/
+EnvironmentFile=-/etc/etcd/etcd.conf
+ExecStart=/usr/bin/etcd
+
+[Install]
+WantedBy=multi-user.target
