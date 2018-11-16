@@ -1,7 +1,19 @@
-- host: k8s-master
-  task: 
+- hosts: k8s-master
+  tasks: 
     - name: make etcd  dir /var/lib/etcd/
-
+      file:
+        path=/var/lib/etcd/
+        state=dictionary
+    - name: make k8s conf dir /etc/kubenetes
+      file:
+        path=/etc/kubenetes
+        state=dictionary
+    - name: make dir binaries
+      file:
+        path=~/k8s-ansible/binaries
+        state=dictionary
+    - name: download etcd 
+      shell: wget http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/master/etcd
     - name: cp master binaries to master /usr/bin
       cp: 
         src:~/k8s-ansible/binaries/master

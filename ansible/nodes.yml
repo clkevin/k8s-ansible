@@ -1,1 +1,1 @@
-- host: k8s-nodes
+- hosts: k8s-nodes

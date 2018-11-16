@@ -1,5 +1,5 @@
-- host:all
-  task:
+- hosts: all
+  tasks:
     - name: mkdir conf dir /etc/kubenetes
       file:
         path=/etc/kubenetes

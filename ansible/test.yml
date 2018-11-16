@@ -1,0 +1,7 @@
+---
+- hosts: k8s-master
+  tasks: 
+    - name: make dir binaries
+      file:
+        path=~/k8s-ansible/binaries
+        state=dictionary
