@@ -3,17 +3,18 @@
 # build节点
 [k8s-build]
 k8s-master 
-etcd-ip=10.254.0.56
-service-cluster-ip-range=169.169.0.0/16
-master-ip=10.254.0.56
-api-server-ip=10.254.0.56
+etcd_ip=10.254.0.56
+service_cluster_ip_range=169.169.0.0/16
+master_ip=10.254.0.56
+api_server_ip=10.254.0.56
+node_name=k8s-master
 
 # master节点
 [k8s-masters]
-k8s-master  node-name=k8s-master
+k8s-master  node_name=k8s-master
 
 # node 节点
 [k8s-nodes]
-k8s-node1 node-name=k8s-node1
-k8s-node2 node-name=k8s-node2
-k8s-node3 node-name=k8s-node3
+k8s-node1 node_name=k8s-node1
+k8s-node2 node_name=k8s-node2
+k8s-node3 node_name=k8s-node3

@@ -1,0 +1,37 @@
+- hosts: k8s-nodes
+  tests: 
+    - name: produce node conf
+      template: 
+        src: ~/k8s-ansible/template/{{item.service}}.j2
+        dest: /etc/kubenetes/{{item.service}}
+      with_items:
+        - {service: 'kubelet'}
+        - {service: 'proxy'}
+    - name: install node binaries
+      copy: 
+        src: ~/k8s-ansible/binaries/node/{{item.service}}
+        dest: /usr/bin/{{item.service}}
+      with_items:
+        - {service: 'kubectl'}
+        - {service: 'kubelet'}
+        - {service: 'proxy'}
+    - name: copy node systemctl service
+      copy:
+        src: ~/k8s-ansible/systemctl/node/{{item.service}}.service
+        dest: /usr/lib/systemd/system/{{item.service}}.service
+      with_items:
+        - {service: 'kubelet'}
+        - {service: 'proxy'}
+    - name: enable node service
+      shell:  systemctl enable {{item.service}}.service
+      with_items:
+        - {service: 'kubelet'}
+        - {service: 'proxy'}
+    - name: start  node service
+      shell:  systemctl start {{item.service}}.service
+      with_items:
+        - {service: 'kubelet'}
+        - {service: 'proxy'}
+
+
+        
