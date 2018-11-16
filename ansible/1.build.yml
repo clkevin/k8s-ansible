@@ -5,7 +5,9 @@
         path=~/k8s-ansible/binaries/master
         state=directory
     - name: download master binaries
-      shell: wget http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/master/{{ item.service }} -o ~/k8s-ansible/binaries/master/{{ item.service }}
+      get_url: 
+        dest: ~/k8s-ansible/binaries/master/{{ item.service }}
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/master/{{ item.service }}
       with_items:
         - {service: 'etcd'}
         - {service: 'etcdctl'}
@@ -19,7 +21,9 @@
         path=~/k8s-ansible/binaries/node
         state=directory
     - name: download node binaries
-      shell: wget http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/node/{{ item.service }} -o ~/k8s-ansible/binaries/node/{{ item.service }}
+      get_url: 
+        dest: ~/k8s-ansible/binaries/node/{{ item.service }}
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/node/{{ item.service }}      
       with_items:
         - {service: 'kubectl'}
         - {service: 'kubelet'}
