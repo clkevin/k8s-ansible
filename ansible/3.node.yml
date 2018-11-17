@@ -42,3 +42,5 @@
       with_items:
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
+    - name: pull images pause-amd64
+      shell:  docker pull registry.cn-beijing.aliyuncs.com/jinlx/pause-amd64:3.0
