@@ -1,4 +1,4 @@
 
-KUBE_CONTROLLER_MANAGER_ARGS="--master=http://{{master_ip}}:8080 --logtostderr=false --log-dir=/var/log/kubernetes --v=2"
+KUBE_CONTROLLER_MANAGER_ARGS="--master=http://{{master_ip}}:8080 --logtostderr=false --log-dir=/var/log/kubernetes --root-ca-file=/run/kubernetes/apiserver.crt --service-account-private-key-file=/run/kubernetes/apiserver.key --v=2"
 
 
