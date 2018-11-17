@@ -1,6 +1,6 @@
 
 - hosts: k8s-build
-  - tasks:
+  tasks:
     - name: deal kubedns-svc.yaml
       template:
         src:~/k8s-ansible/template/kubedns-svc.j2
@@ -10,7 +10,7 @@
         src:~/k8s-ansible/template/kubedns-controller.j2
         dest:~/k8s-ansible/dns/kubedns-controller.yml
     - name: k8s create cm sa svc controller
-      shell:
+      shell: kubectl create -f {{item.yml}}
       with_items:
       - {yml:'kubedns-cm.yaml'}
       - {yml:'kubedns-sa.yaml'}
