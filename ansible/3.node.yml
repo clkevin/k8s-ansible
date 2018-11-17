@@ -21,14 +21,14 @@
         dest: /usr/lib/systemd/system/{{item.service}}.service
       with_items:
         - {service: 'kubelet'}
-        - {service: 'proxy'}
+        - {service: 'kube-proxy'}
     - name: enable node service
       shell:  systemctl enable {{item.service}}.service
       with_items:
         - {service: 'kubelet'}
-        - {service: 'proxy'}
+        - {service: 'kube-proxy'}
     - name: start  node service
       shell:  systemctl start {{item.service}}.service
       with_items:
         - {service: 'kubelet'}
-        - {service: 'proxy'}
+        - {service: 'kube-proxy'}
