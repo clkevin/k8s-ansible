@@ -7,7 +7,7 @@
     - name: produce master conf
       template: 
         src: ~/k8s-ansible/template/{{item.service}}.j2
-        dest: /etc/kubenetes/{{item.service}}
+        dest: /etc/kubernetes/{{item.service}}
 
       with_items:
         - {service: 'apiserver'}

@@ -2,6 +2,6 @@
   tasks:
     - name: mkdir conf dir /etc/kubenetes
       file:
-        path=/etc/kubenetes
+        path=/etc/kubernetes
         state=directory
         
