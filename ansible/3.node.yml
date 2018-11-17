@@ -1,5 +1,9 @@
 - hosts: k8s-nodes
   tasks: 
+    - name: mkdir /var/lib/kubelet
+      file:
+        path: /var/lib/kubelet
+        state: directory
     - name: produce node conf
       template: 
         src: ~/k8s-ansible/template/{{item.service}}.j2
