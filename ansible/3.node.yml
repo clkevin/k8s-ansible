@@ -27,6 +27,7 @@
       with_items:
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
+        - {service: 'docker'}
     - name: enable node service
       shell:  systemctl enable {{item.service}}.service
       with_items:
