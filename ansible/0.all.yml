@@ -1,0 +1,7 @@
+- hosts: all
+  tasks:
+    - name: mkdir conf dir /etc/kubenetes
+      file:
+        path=/etc/kubenetes
+        state=directory
+        
