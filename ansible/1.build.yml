@@ -4,13 +4,19 @@
       file:
         path=~/k8s-ansible/binaries/master
         state=directory
-    - name: download master binaries
+    - name: download etcd binaries
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
         url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/master/{{ item.service }}
       with_items:
         - {service: 'etcd'}
         - {service: 'etcdctl'}
+
+    - name: download master binaries
+      get_url: 
+        dest: ~/k8s-ansible/binaries/master/{{ item.service }}
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.9.8/master/{{ item.service }}
+      with_items:
         - {service: 'kube-apiserver'}
         - {service: 'kube-controller-manager'}
         - {service: 'kubectl'}

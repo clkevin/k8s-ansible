@@ -44,5 +44,18 @@
         - {service: 'kube-proxy'}
     - name: pull images pause-amd64
       shell:  docker pull registry.cn-beijing.aliyuncs.com/liu-kevin/pause-amd64:3.0
-    - name: pull tag pause-amd64
+    - name: tag pause-amd64
       shell:  docker tag registry.cn-beijing.aliyuncs.com/liu-kevin/pause-amd64:3.0  gcr.io/google_containers/pause-amd64:3.0
+      
+    - name: pull kube-dns images
+      shell: docker pull registry.cn-beijing.aliyuncs.com/liu-kevin/{{item.image}}:1.14.1
+      with_items:
+      - {image: 'k8s-dns-kube-dns-amd64'}
+      - {image: 'k8s-dns-dnsmasq-nanny-amd64'}
+      - {image: 'k8s-dns-sidecar-amd64'}
+    - name: tag kube-dns images
+      shell: docker tag rregistry.cn-beijing.aliyuncs.com/liu-kevin/{{item.image}}:1.14.1  gcr.io/google_containers/{{item.image}}:1.14.1
+      with_items:
+      - {image: 'k8s-dns-kube-dns-amd64'}
+      - {image: 'k8s-dns-dnsmasq-nanny-amd64'}
+      - {image: 'k8s-dns-sidecar-amd64'}
