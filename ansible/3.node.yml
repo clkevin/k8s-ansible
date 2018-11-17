@@ -1,5 +1,5 @@
 - hosts: k8s-nodes
-  tasts: 
+  tasks: 
     - name: produce node conf
       template: 
         src: ~/k8s-ansible/template/{{item.service}}.j2
@@ -32,6 +32,3 @@
       with_items:
         - {service: 'kubelet'}
         - {service: 'proxy'}
-
-
-        
