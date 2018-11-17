@@ -8,6 +8,7 @@
       template: 
         src: ~/k8s-ansible/template/{{item.service}}.j2
         dest: /etc/kubenetes/{{item.service}}
+
       with_items:
         - {service: 'apiserver'}
         - {service: 'controller-manager'}
@@ -16,6 +17,7 @@
       copy: 
         src: ~/k8s-ansible/binaries/master/{{item.service}}
         dest: /usr/bin/{{item.service}}
+        mode: 744
       with_items:
         - {service: 'etcd'}
         - {service: 'kube-apiserver'}
