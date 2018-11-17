@@ -28,6 +28,10 @@
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
         - {service: 'docker'}
+    - name: reload systemctl config
+      shell: systemctl daemon-reload
+    - name: restart docker 
+      shell: systemctl restart docker.service
     - name: enable node service
       shell:  systemctl enable {{item.service}}.service
       with_items:
