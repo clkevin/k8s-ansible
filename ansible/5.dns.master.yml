@@ -10,7 +10,7 @@
         src: ~/k8s-ansible/template/kubedns-controller.j2
         dest: ~/k8s-ansible/dns/kubedns-controller.yml
     - name: k8s create cm sa svc controller
-      shell: kubectl create -f {{item.yml}}
+      shell: kubectl create -f ~/k8s-ansible/ansible/{{item.yml}}
       with_items:
       - {yml: 'kubedns-cm.yaml'}
       - {yml: 'kubedns-sa.yaml'}
