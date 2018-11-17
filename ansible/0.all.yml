@@ -4,4 +4,7 @@
       file:
         path=/etc/kubernetes
         state=directory
-        
+    - name: disable all nodes firewalld.service
+      shell: systemctl disable firewalld.service
+    - name: stop all nodes firewalld.service
+      shell: systemctl stop firewalld.service
