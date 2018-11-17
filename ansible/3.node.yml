@@ -43,4 +43,6 @@
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
     - name: pull images pause-amd64
-      shell:  docker pull registry.cn-beijing.aliyuncs.com/jinlx/pause-amd64:3.0
+      shell:  docker pull registry.cn-beijing.aliyuncs.com/liu-kevin/pause-amd64:3.0
+    - name: pull tag pause-amd64
+      shell:  docker tag registry.cn-beijing.aliyuncs.com/liu-kevin/pause-amd64:3.0  gcr.io/google_containers/pause-amd64:3.0
