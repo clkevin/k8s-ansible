@@ -14,7 +14,7 @@
       with_items:
         - {service: 'kubectl'}
         - {service: 'kubelet'}
-        - {service: 'proxy'}
+        - {service: 'kube-proxy'}
     - name: copy node systemctl service
       copy:
         src: ~/k8s-ansible/systemctl/node/{{item.service}}.service
