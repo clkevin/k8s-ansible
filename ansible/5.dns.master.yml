@@ -3,16 +3,16 @@
   tasks:
     - name: deal kubedns-svc.yaml
       template:
-        src:~/k8s-ansible/template/kubedns-svc.j2
-        dest:~/k8s-ansible/dns/kubedns-svc.yml
+        src: ~/k8s-ansible/template/kubedns-svc.j2
+        dest: ~/k8s-ansible/dns/kubedns-svc.yml
     - name: deal kubedns-controller.yaml
       template:
-        src:~/k8s-ansible/template/kubedns-controller.j2
-        dest:~/k8s-ansible/dns/kubedns-controller.yml
+        src: ~/k8s-ansible/template/kubedns-controller.j2
+        dest: ~/k8s-ansible/dns/kubedns-controller.yml
     - name: k8s create cm sa svc controller
       shell: kubectl create -f {{item.yml}}
       with_items:
-      - {yml:'kubedns-cm.yaml'}
-      - {yml:'kubedns-sa.yaml'}
-      - {yml:'kubedns-svc.yaml'}
-      - {yml:'kubedns-controller.yaml'}
+      - {yml: 'kubedns-cm.yaml'}
+      - {yml: 'kubedns-sa.yaml'}
+      - {yml: 'kubedns-svc.yaml'}
+      - {yml: 'kubedns-controller.yaml'}
