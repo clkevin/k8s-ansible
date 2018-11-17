@@ -1,14 +1,14 @@
 
 - hosts: k8s-nodes
-  - tasks:
+  tasks:
     - name: pull dns images
-      shell:docker pull registry.cn-beijing.aliyuncs.com/yzx/{{item.image}}:1.4.1
+      shell: docker pull registry.cn-beijing.aliyuncs.com/yzx/{{item.image}}:1.4.1
       with_items:
       - {image: 'k8s-dns-kube-dns-amd64'}
       - {image: 'k8s-dns-dnsmasq-nanny-amd64'}
       - {image: 'k8s-dns-sidecar-amd64'}
     - name: tag dns images
-      shell:docker tag registry.cn-beijing.aliyuncs.com/yzx/{{item.image}}:1.4.1  gcr.io/google_containers/{{item.image}}:1.14.1
+      shell: docker tag registry.cn-beijing.aliyuncs.com/yzx/{{item.image}}:1.4.1  gcr.io/google_containers/{{item.image}}:1.14.1
       with_items:
       - {image: 'k8s-dns-kube-dns-amd64'}
       - {image: 'k8s-dns-dnsmasq-nanny-amd64'}
