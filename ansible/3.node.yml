@@ -15,6 +15,7 @@
       copy: 
         src: ~/k8s-ansible/binaries/node/{{item.service}}
         dest: /usr/bin/{{item.service}}
+        mode: 744
       with_items:
         - {service: 'kubectl'}
         - {service: 'kubelet'}
