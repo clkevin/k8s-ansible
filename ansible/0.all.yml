@@ -4,6 +4,10 @@
       template: 
         src: ~/k8s-ansible/template/hostname.j2
         dest: /etc/hostname
+    - name: copy hosts to /etc/hosts
+      copy: 
+        src: ~/k8s-ansible/customer/hosts
+        dest: /etc/hosts
     - name: mkdir conf dir /etc/kubernetes
       file:
         path=/etc/kubernetes
