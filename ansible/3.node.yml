@@ -56,7 +56,7 @@
       - {image: 'k8s-dns-dnsmasq-nanny-amd64'}
       - {image: 'k8s-dns-sidecar-amd64'}
     - name: tag kube-dns images
-      shell: docker tag rregistry.cn-beijing.aliyuncs.com/kevin-public/{{item.image}}:1.14.1  gcr.io/google_containers/{{item.image}}:1.14.1
+      shell: docker tag registry.cn-beijing.aliyuncs.com/kevin-public/{{item.image}}:1.14.1  gcr.io/google_containers/{{item.image}}:1.14.1
       with_items:
       - {image: 'k8s-dns-kube-dns-amd64'}
       - {image: 'k8s-dns-dnsmasq-nanny-amd64'}
