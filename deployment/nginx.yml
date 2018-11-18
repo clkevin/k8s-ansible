@@ -1,15 +1,12 @@
 
-
-
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+  name: nginx
   labels:
     app: nginx
-  name: nginx
-  namespace: default
 spec:
-  replicas: 2
+  replicas: 3 #副本数量
   selector:
     matchLabels:
       app: nginx
@@ -19,7 +16,18 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx
-        imagePullPolicy: Always
-        name: nginx
-      restartPolicy: Always
+      - name: nginx
+        image: registry.cn-beijing.aliyuncs.com/klx/nginx
+        #command: [ "sh", "/etc/run.sh" ]
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 0.05
+            memory: 16Mi
+          limits:
+            cpu: 0.1
+            memory: 32Mi
+ 
