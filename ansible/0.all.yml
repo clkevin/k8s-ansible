@@ -1,8 +1,12 @@
 - hosts: all
   tasks:
-    - name: mkdir conf dir /etc/kubenetes
+    - name: mkdir conf dir /etc/kubernetes
       file:
         path=/etc/kubernetes
+        state=directory
+    - name: mkdir log dir /var/log/kubernetes
+      file:
+        path=/var/log/kubernetes
         state=directory
     - name: disable all nodes firewalld.service
       shell: systemctl disable firewalld.service
