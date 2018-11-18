@@ -1,5 +1,9 @@
 - hosts: all
   tasks:
+    - name: edit hostname
+      template: 
+        src: ~/k8s-ansible/template/hostname.j2
+        dest: /etc/hostname
     - name: mkdir conf dir /etc/kubernetes
       file:
         path=/etc/kubernetes

@@ -1,9 +1,5 @@
 - hosts: k8s-build
   tasks: 
-    - name: install ansible 
-      shell: yum -y install ansible
-    - name: install git
-      shell: yum -y install git
     - name: make master dir binaries
       file:
         path=~/k8s-ansible/binaries/master
