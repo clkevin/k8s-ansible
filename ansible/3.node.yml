@@ -1,7 +1,7 @@
 - hosts: k8s-nodes
   tasks: 
     - name: install docker 
-      shell: yum install -y docker.io
+      shell: yum install -y docker
     - name: mkdir /var/lib/kubelet
       file:
         path: /var/lib/kubelet
