@@ -2,22 +2,23 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: nginx
+  name: busybox
   labels:
-    app: nginx
+    app: busybox
 spec:
   replicas: 1 #副本数量
   selector:
     matchLabels:
-      app: nginx
+      app: busybox
   template:
     metadata:
       labels:
-        app: nginx
+        app: busybox
     spec:
       containers:
-      - name: nginx
-        image: registry.cn-beijing.aliyuncs.com/kevin-public/nginx:1.0.0
+      - name: busybox
+        image: registry.cn-beijing.aliyuncs.com/kevin-public/busybox:1.0.0
+        command: [ "top" ]
         ports:
         - containerPort: 80
           name: http
