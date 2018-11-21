@@ -4,6 +4,10 @@
       file:
         path=~/k8s-ansible/binaries/master
         state=directory
+    - name: make node dir binaries
+      file:
+        path=~/k8s-ansible/binaries/node
+        state=directory
     - name: download etcd binaries
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
@@ -34,4 +38,12 @@
         - {service: 'kubectl'}
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
-    
+    - name: download flanneld binaries
+      get_url:
+        url: http://blog.liu-kevin.com/content/images/uploader/fannel/v0.10.0/{{item.service}}
+        dest: ~/k8s-ansible/binaries/node/{{ item.service }}
+      with_items:
+        - { service: 'flanneld'}
+        - { service: 'mk-docker-opts.sh'} 
+    - name: etcdctl set flannel conifg
+      shell: etcdctl set /coreos.com/network/config '{"Network":"172.17.0.0/16"}'

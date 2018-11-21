@@ -1,0 +1,35 @@
+- hosts: k8s-nodes
+  tasks:
+    - name: copy flannel binaries to nodes
+      copy:
+        src: ~/k8s-ansible/systemctl/node/flanneld.service
+        dest: /usr/lib/systemd/system/flanneld.service
+    - name: copy flannel.service to nodes
+      copy:
+        src: ~/k8s-ansible/binaries/node/{{item.service}}
+        dest: /usr/bin/{{item.service}}
+      with_items:
+        - { service: 'flanneld'}
+        - { service: 'mk-docker-opts.sh'}
+    - name: copy flannel config
+      copy:
+        src: ~/k8s-ansible/template/flannel.j2
+        dest: /etc/sysconfig/flannel  
+    - name: stop docker 
+      shell: systemctl stop docker.service
+    - name: load systemctl conf
+      shell: systemctl daemon-reload    
+    - name: start flanneld
+      shell: systemctl start flanneld.service
+    - name: config docker0 network ip
+      shell: {{item.service}}
+      with_items:
+        - {service:'mk-docker-opts.sh -i'}
+        - {service:'source /run/flannel/subnet.env'}
+        - {service:'ifconfig docker0 ${FLANNEL_SUBNET}'}
+    - name: start docker
+      shell: systemctl restart docker
+
+
+
+
