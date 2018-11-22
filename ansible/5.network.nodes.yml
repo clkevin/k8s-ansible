@@ -8,15 +8,16 @@
       copy:
         src: ~/k8s-ansible/binaries/node/{{item.service}}
         dest: /usr/bin/{{item.service}}
-      with_items:
+        mode: u+x  
+    with_items:
         - { service: 'flanneld'}
         - { service: 'mk-docker-opts.sh'}
     - name: chmod mk-docker-opts.sh
       shell: chmod u+x /usr/bin/mk-docker-opts.sh
     - name: copy flannel config
-      copy:
+      template:
         src: ~/k8s-ansible/template/flannel.j2
-        dest: /etc/sysconfig/flannel  
+        dest: /etc/sysconfig/flanneld
     - name: stop docker 
       shell: systemctl stop docker.service
     - name: load systemctl conf
