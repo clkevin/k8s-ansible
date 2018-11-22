@@ -23,12 +23,12 @@
       shell: systemctl daemon-reload    
     - name: start flanneld
       shell: systemctl start flanneld.service
-    - name: config docker0 network ip
-      shell: {{item.service}}
-      with_items:
-        - {service:'mk-docker-opts.sh -i'}
-        - {service:'source /run/flannel/subnet.env'}
-        - {service:'ifconfig docker0 ${FLANNEL_SUBNET}'}
+    - name: config docker0 network ip 1
+      shell: mk-docker-opts.sh -i
+    - name: config docker0 network ip 2
+      shell: source /run/flannel/subnet.env
+    - name: config docker0 network ip 3
+      shell: ifconfig docker0 ${FLANNEL_SUBNET}
     - name: start docker
       shell: systemctl restart docker
 
