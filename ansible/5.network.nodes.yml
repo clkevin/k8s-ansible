@@ -9,7 +9,7 @@
         src: ~/k8s-ansible/binaries/node/{{item.service}}
         dest: /usr/bin/{{item.service}}
         mode: u+x  
-    with_items:
+      with_items:
         - { service: 'flanneld'}
         - { service: 'mk-docker-opts.sh'}
     - name: chmod mk-docker-opts.sh

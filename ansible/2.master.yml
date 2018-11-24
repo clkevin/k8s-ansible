@@ -48,6 +48,8 @@
         - {service: 'kube-apiserver'}
         - {service: 'kube-controller-manager'}
         - {service: 'kube-scheduler'}
+    - name: etcdctl set flannel conifg
+      shell: etcdctl set /coreos.com/network/config '{"Network":"172.17.0.0/16"}'
 
 
 

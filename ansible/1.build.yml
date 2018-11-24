@@ -45,5 +45,3 @@
       with_items:
         - { service: 'flanneld'}
         - { service: 'mk-docker-opts.sh'} 
-    - name: etcdctl set flannel conifg
-      shell: etcdctl set /coreos.com/network/config '{"Network":"172.17.0.0/16"}'
