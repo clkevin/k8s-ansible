@@ -1,19 +1,18 @@
-- hosts: k8s-master
+- hosts: k8s-masters
   tasks: 
-    - name: make etcd  dir /var/lib/etcd/
+    - name: make etcd  dir /var/lib/etcd/  # 创建etcd lib目录
       file:
         path=/var/lib/etcd/
         state=directory
-    - name: produce master conf
+    - name: produce master conf  # 生成 master服务配置文件
       template: 
         src: ~/k8s-ansible/template/{{item.service}}.j2
         dest: /etc/kubernetes/{{item.service}}
-
       with_items:
         - {service: 'apiserver'}
         - {service: 'controller-manager'}
         - {service: 'scheduler'}
-    - name: install master binaries
+    - name: install master binaries  # 安装 master二进制文件
       copy: 
         src: ~/k8s-ansible/binaries/master/{{item.service}}
         dest: /usr/bin/{{item.service}}
@@ -25,7 +24,7 @@
         - {service: 'kube-scheduler'}
         - {service: 'etcdctl'}
         - {service: 'kubectl'}
-    - name: copy master systemctl service
+    - name: copy master systemctl service  # 复制systemctl 文件
       copy:
         src: ~/k8s-ansible/systemctl/master/{{item.service}}.service
         dest: /usr/lib/systemd/system/{{item.service}}.service
@@ -34,21 +33,21 @@
         - {service: 'kube-apiserver'}
         - {service: 'kube-controller-manager'}
         - {service: 'kube-scheduler'}
-    - name: enable master service
+    - name: enable master service  # 开机自启动服务
       shell:  systemctl enable {{item.service}}.service
       with_items:
         - {service: 'etcd'}
         - {service: 'kube-apiserver'}
         - {service: 'kube-controller-manager'}
         - {service: 'kube-scheduler'}
-    - name: start  master service
+    - name: start  master service  # 启动服务
       shell:  systemctl start {{item.service}}.service
       with_items:
         - {service: 'etcd'}
         - {service: 'kube-apiserver'}
         - {service: 'kube-controller-manager'}
         - {service: 'kube-scheduler'}
-    - name: etcdctl set flannel conifg
+    - name: etcdctl set flannel conifg  # 为flannel设置etcd值
       shell: etcdctl set /coreos.com/network/config '{"Network":"172.17.0.0/16"}'
 
 

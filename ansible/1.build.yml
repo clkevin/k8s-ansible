@@ -1,14 +1,14 @@
 - hosts: k8s-build
   tasks: 
-    - name: make master dir binaries
+    - name: make master dir binaries  #创建master二进制文件临时存储目录
       file:
         path=~/k8s-ansible/binaries/master
         state=directory
-    - name: make node dir binaries
+    - name: make node dir binaries  #创建node二进制文件临时存储目录
       file:
         path=~/k8s-ansible/binaries/node
         state=directory
-    - name: download etcd binaries
+    - name: download etcd binaries    #下载etcd二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
         url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/master/{{ item.service }}
@@ -16,7 +16,7 @@
         - {service: 'etcd'}
         - {service: 'etcdctl'}
 
-    - name: download master binaries
+    - name: download master binaries  #下载master节点的二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
         url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.9.8/{{ item.service }}
@@ -25,20 +25,15 @@
         - {service: 'kube-controller-manager'}
         - {service: 'kubectl'}
         - {service: 'kube-scheduler'}
-
-    - name: make node dir binaries
-      file:
-        path=~/k8s-ansible/binaries/node
-        state=directory
-    - name: download node binaries
+    - name: download node binaries  #下载node节点的二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/node/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/node/{{ item.service }}      
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/node/{{ item.service }}
       with_items:
         - {service: 'kubectl'}
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
-    - name: download flanneld binaries
+    - name: download flanneld binaries  #下载flanneld所的二进制文件
       get_url:
         url: http://blog.liu-kevin.com/content/images/uploader/fannel/v0.10.0/{{item.service}}
         dest: ~/k8s-ansible/binaries/node/{{ item.service }}

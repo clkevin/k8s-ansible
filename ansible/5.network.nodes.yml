@@ -1,10 +1,10 @@
 - hosts: k8s-nodes
   tasks:
-    - name: copy flannel binaries to nodes
+    - name: copy flannel systemctl service to nodes # 复制flannel systemctl 配置文件
       copy:
         src: ~/k8s-ansible/systemctl/node/flanneld.service
         dest: /usr/lib/systemd/system/flanneld.service
-    - name: copy flannel.service to nodes
+    - name: copy flannel.service to nodes  # 安装flannel二进制文件
       copy:
         src: ~/k8s-ansible/binaries/node/{{item.service}}
         dest: /usr/bin/{{item.service}}
@@ -12,27 +12,28 @@
       with_items:
         - { service: 'flanneld'}
         - { service: 'mk-docker-opts.sh'}
-    - name: chmod mk-docker-opts.sh
+    - name: chmod mk-docker-opts.sh  # 对二进制文件赋执行权限
       shell: chmod u+x /usr/bin/mk-docker-opts.sh
-    - name: copy flannel config
+    - name: copy flannel config  # 复制flannel 配置文件
       template:
         src: ~/k8s-ansible/template/flannel.j2
         dest: /etc/sysconfig/flanneld
-    - name: stop docker 
+    - name: stop docker # 关闭docker
       shell: systemctl stop docker.service
-    - name: load systemctl conf
+    - name: load systemctl conf  # 加载systemctl 配置文件
       shell: systemctl daemon-reload    
-    - name: start flanneld
+    - name: start flanneld  # 启动flannel
       shell: systemctl start flanneld.service
-    - name: config docker0 network ip 1
+    - name: exec mk-docker-opts sh script # 执行脚本 mk-docker-opts.sh 
       shell: mk-docker-opts.sh -i
-    - name: config docker0 network ip 2
+    - name: produce env # 生成 环境变量
       shell: source /run/flannel/subnet.env
-    - name: config docker0 network ip 3
+    - name: config docker0 network ip   # 配置docker 0网络ip
       shell: ifconfig docker0 ${FLANNEL_SUBNET}
-    - name: start docker
+    - name: start docker  # 启动docker
       shell: systemctl restart docker
-
+    - name: restart kubelet # 重启 kubelet，否则 node not ready
+      shell: systemctl restart kubelet
 
 
 
