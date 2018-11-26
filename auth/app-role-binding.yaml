@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: test-sa-rolebinding
+  namespace: default
+subjects:
+- kind: User
+  name: system:serviceaccount:default:app
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: app
+  apiGroup: rbac.authorization.k8s.io
