@@ -8,3 +8,6 @@ binaries参考 [k8s github](#https://github.com/kubernetes/kubernetes)
 1 master 3 node  1 etcd
 
 具体搭建步骤参考 [k8s集群环境搭建之通过ansible快速搭建] - http://blog.liu-kevin.com/2018/11/14/k8s-2/
+
+以上基于centos搭建成功，若搭建过程中遇到问题，欢迎讨论
+
