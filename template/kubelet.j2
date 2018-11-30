@@ -1,4 +1,4 @@
 
 
-KUBELET_ARGS="--api-servers=http://{{api_server_ip}}:8080 --hostname-override={{node_name}} --logtostderr=false --log-dir=/var/log/kubernetes --cluster-dns={{dns_server_ip}} --cluster-domain={{dns_domain}} --cgroups-per-qos=false --enforce-node-allocatable='' --v=2"
+KUBELET_ARGS="--api-servers={{api_server_ip}} --hostname-override={{node_name}} --logtostderr=false --log-dir=/var/log/kubernetes --cluster-dns={{dns_server_ip}} --cluster-domain={{dns_domain}} --cgroups-per-qos=false --enforce-node-allocatable='' --v=2"
 

@@ -1,0 +1,40 @@
+
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+
+    keepalive_timeout  65;
+
+
+    upstream k8s-masters{
+       {{k8s_servers}}
+    }
+
+    server {
+        listen       443;
+
+        location / {
+             proxy_pass http://k8s-masters;
+             index  index.html index.htm;
+        }
+
+    }
+
+}
