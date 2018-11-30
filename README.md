@@ -7,4 +7,4 @@ binaries参考 [k8s github](#https://github.com/kubernetes/kubernetes)
 该分支对应的为
 3 master 4 node  3 etcd
 
-具体搭建步骤参考 [k8s集群环境搭建之通过ansible快速搭建] - http://blog.liu-kevin.com/2018/11/14/k8s-2/
+未完成 持续更新中
