@@ -4,6 +4,14 @@
       file:
         path=/var/lib/etcd/
         state=directory
+    - name: make etcd  dir /etc/etcd/  # 创建etcd lib目录
+      file:
+        path=/etc/etcd/
+        state=directory
+    - name: copy etcd.conf to /etc/etcd/
+      template:
+        src: ~/k8s-ansible/template/etcd.conf.j2
+        dest: /etc/etcd/etcd.conf
     - name: produce master conf  # 生成 master服务配置文件
       template: 
         src: ~/k8s-ansible/template/{{item.service}}.j2

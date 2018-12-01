@@ -1,0 +1,30 @@
+# [member]
+# 节点名称
+ETCD_NAME={{node_name}}
+# 数据存放位置
+ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+#ETCD_WAL_DIR=""
+#ETCD_SNAPSHOT_COUNT="10000"
+#ETCD_HEARTBEAT_INTERVAL="100"
+#ETCD_ELECTION_TIMEOUT="1000"
+# 监听其他 Etcd 实例的地址
+ETCD_LISTEN_PEER_URLS="http://0.0.0.0:2380"
+# 监听客户端地址
+ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379,http://0.0.0.0:4001"
+#ETCD_MAX_SNAPSHOTS="5"
+#ETCD_MAX_WALS="5"
+#ETCD_CORS=""
+#
+#[cluster]
+# 通知其他 Etcd 实例地址
+ETCD_INITIAL_ADVERTISE_PEER_URLS="http://{{node_name}}:2380"
+# if you use different ETCD_NAME (e.g. test), set ETCD_INITIAL_CLUSTER value for this name, i.e. "test=http://..."
+# 初始化集群内节点地址
+#ETCD_INITIAL_CLUSTER="node1=http://node1:2380,node2=http://node2:2380,etcd2=http://etcd2:2380"
+ETCD_INITIAL_CLUSTER="{{ETCD_INITIAL_CLUSTER}}"
+# 初始化集群状态，new 表示新建
+ETCD_INITIAL_CLUSTER_STATE="new"
+# 初始化集群 token
+ETCD_INITIAL_CLUSTER_TOKEN="mritd-etcd-cluster"
+# 通知 客户端地址
+ETCD_ADVERTISE_CLIENT_URLS="http://{{node_name}}:2379,http://{{node_name}}:4001"
