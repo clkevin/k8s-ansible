@@ -5,7 +5,7 @@
     - name: copy nginx conf
       template:
         src: ~/k8s-ansible/template/nginx.conf.j2
-        dest: /etc/nginx/nginx.conf
+        dest: /etc/nginx/conf.d/nginx.conf
     - name: 重启nginx
       shell: nginx -s reload
     - name: make master dir binaries  #创建master二进制文件临时存储目录
