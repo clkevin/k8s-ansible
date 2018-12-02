@@ -26,11 +26,11 @@
         state: directory
     - name: copy k8s cert file to  /var/run/kubernetes  # 创建etcd lib目录
       copy:
-        src:~/k8s-ansible/cert/{{item}}
-        dest: /var/run/kubernetes/{{item}}
+        src:~/k8s-ansible/cert/{{item.service}}
+        dest: /var/run/kubernetes/{{item.service}}
       with_items:
-        - apiserver.crt
-        - apiserver.key
+        - {service: 'apiserver.crt'}
+        - {service: 'apiserver.key'}
     - name: install master binaries  # 安装 master二进制文件
       copy: 
         src: ~/k8s-ansible/binaries/master/{{item.service}}
