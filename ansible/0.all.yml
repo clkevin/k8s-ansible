@@ -10,12 +10,16 @@
         dest: /etc/hosts
     - name: mkdir conf dir /etc/kubernetes #所有节点创建k8s配置文件目录
       file:
-        path=/etc/kubernetes
-        state=directory
+        path: /etc/kubernetes
+        state: directory
+    - name: mkdir kubeconfig ~/.kube/   # 创建kubeconfig目录
+      file:
+        path: ~/.kube
+        state: directory
     - name: mkdir log dir /var/log/kubernetes #所有节点创建k8slog目录
       file:
-        path=/var/log/kubernetes
-        state=directory
+        path: /var/log/kubernetes
+        state: directory
     - name: disable all nodes firewalld.service  #所有节点禁用防火墙
       shell: systemctl disable firewalld.service
     - name: stop all nodes firewalld.service  #  所有节点关闭防火墙
