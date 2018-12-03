@@ -22,7 +22,7 @@ etcd_ip=http://k8s-master1:2379,http://k8s-master2:2379,http://k8s-master3:2379
 # service 的ip 段
 service_cluster_ip_range=169.169.0.0/16
 # nginx ip
-api_server_ip=https://k8s-master1:443
+api_server_ip=http://k8s-master1:443
 # 默认为service ip段的 第二个
 dns_server_ip=169.169.0.2
 dns_domain=cluster.local

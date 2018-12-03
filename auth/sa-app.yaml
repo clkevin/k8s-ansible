@@ -1,3 +1,4 @@
+# 该脚本 无法执行成功  可通过 kubectl create sa app 创建
 apiVersion: v1
 kind: ServiceAccount
 metadata:

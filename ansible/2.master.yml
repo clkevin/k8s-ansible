@@ -26,7 +26,7 @@
         state: directory
     - name: copy k8s cert file to  /var/run/kubernetes  # 创建etcd lib目录
       copy:
-        src:~/k8s-ansible/cert/{{item.service}}
+        src: ~/k8s-ansible/cert/{{item.service}}
         dest: /var/run/kubernetes/{{item.service}}
       with_items:
         - {service: 'apiserver.crt'}
