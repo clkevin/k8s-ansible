@@ -1,0 +1,12 @@
+- hosts: k8s-build
+  tasks:
+    - name: create kubelet role # 创建kubelet role
+      shell: kubectl create -f ~/k8s-ansible/auth/cluster-role-kubelet.yaml
+    - name: creat kubelet role binding # 创建kubelet role binding
+      shell: kubectl create -f ~/k8s-ansible/auth/cluster-role-binding-kubelet.yaml
+    - name: create app role # 创建node 基本权限
+      shell: kubectl create -f ~/k8s-ansible/auth/role-app.yaml
+    - name: create app default binding # 创建app角色及default用户绑定
+      shell: kubectl create -f ~/k8s-ansible/auth/role-binding-app-default.yaml
+    - name: start nginx # 启动nginx
+      shell: nginx

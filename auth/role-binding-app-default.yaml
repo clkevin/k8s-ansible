@@ -5,7 +5,7 @@ metadata:
   namespace: default
 subjects:
 - kind: User
-  name: system:serviceaccount:default:app
+  name: system:serviceaccount:default:default
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
