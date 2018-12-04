@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 1 #副本数量
+  replicas: 3 #副本数量
   selector:
     matchLabels:
       app: nginx
