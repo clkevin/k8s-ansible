@@ -21,7 +21,7 @@
     - name: stop docker # 关闭docker
       shell: systemctl stop docker.service
     - name: delete docker local-kv.db 
-      shell: rm -f /var/lib/docker/network/files
+      shell: rm -f /var/lib/docker/network/files/local-kv.db
     - name: load systemctl conf  # 加载systemctl 配置文件
       shell: systemctl daemon-reload    
     - name: start flanneld  # 启动flannel

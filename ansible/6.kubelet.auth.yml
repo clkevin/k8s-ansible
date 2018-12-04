@@ -2,6 +2,8 @@
   tasks:
     - name: creat kubelet role binding # 创建kubelet role binding
       shell: kubectl create -f ~/k8s-ansible/auth/cluster-role-binding-node.yaml
+    - name: create kube-proxy role binding # 创建kube-proxy role binding
+      shell: kubectl create -f ~/k8s-ansible/auth/cluster-role-binding-node-proxier.yaml
     - name: create app role # 创建node 基本权限
       shell: kubectl create -f ~/k8s-ansible/auth/role-app.yaml
     - name: create app default binding # 创建app角色及default用户绑定
