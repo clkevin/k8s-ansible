@@ -6,8 +6,8 @@
       template:
         src: ~/k8s-ansible/template/master-nginx.conf.j2
         dest: /etc/nginx/conf.d/master-nginx.conf
-    - name: 重启nginx
-      shell: nginx
+    #- name: 重启nginx  #此处无ca证书文件，启动会报错
+    #  shell: nginx
     - name: make master dir binaries  #创建master二进制文件临时存储目录
       file:
         path=~/k8s-ansible/binaries/master
