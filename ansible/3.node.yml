@@ -1,7 +1,7 @@
 - hosts: k8s-nodes
   tasks: 
     - name: install docker  # 安装docker
-      shell: yum install -y docker
+      shell: yum install -y docker-1.13.1-75.git8633870.el7.centos.x86_64
     - name: mkdir /var/lib/kubelet  # 创建kubelet lib目录
       file:
         path: /var/lib/kubelet
