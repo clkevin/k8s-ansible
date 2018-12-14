@@ -1,0 +1,13 @@
+# 部署服务的角色
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  namespace: default
+  name: deploy
+rules:
+- apiGroups: [""]
+  resources: ["deployments.apps"]
+  verbs: ["create","delete","update"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["create","delete"]

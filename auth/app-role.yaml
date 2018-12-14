@@ -1,3 +1,4 @@
+# node节点上app用户操作k8s角色
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:

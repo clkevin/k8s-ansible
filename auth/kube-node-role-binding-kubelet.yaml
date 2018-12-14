@@ -1,0 +1,13 @@
+# node节点 kubelet 角色绑定
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kube-node-kubelet
+subjects:
+  - kind: ServiceAccount
+    name: kube-node
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: system:node
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,5 @@
+piVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kube-node
+  namespace: default
