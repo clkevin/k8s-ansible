@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: base-deploy-rolebinding
+  namespace: base
+subjects:
+- kind: ServiceAccount
+  name: base-deploy
+  namespace: base
+roleRef:
+  kind: Role
+  name: base-deploy
+  apiGroup: rbac.authorization.k8s.io
