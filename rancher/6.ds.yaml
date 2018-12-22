@@ -1,0 +1,81 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+    name: cattle-node-agent
+    namespace: cattle-system
+spec:
+  selector:
+    matchLabels:
+      app: cattle-agent
+  template:
+    metadata:
+      labels:
+        app: cattle-agent
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: beta.kubernetes.io/os
+                  operator: NotIn
+                  values:
+                    - windows
+      hostNetwork: false  # 此处如果为true，则podip为nodeip，pod无法访问 kubernetes service
+      serviceAccountName: cattle
+      tolerations:
+      - effect: NoExecute
+        key: "node-role.kubernetes.io/etcd"
+        value: "true"
+      - effect: NoSchedule
+        key: "node-role.kubernetes.io/controlplane"
+        value: "true"
+      containers:
+      - name: agent
+        image: registry.cn-beijing.aliyuncs.com/kevin-public/rancher-agent:v2.1.3
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: CATTLE_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: CATTLE_SERVER
+          value: "https://10.254.0.120:8443"
+        - name: CATTLE_CA_CHECKSUM
+          value: "6696638cd1b90f8f8fa3ab2e11ee2902fbb73563ef1a12447dc7c20ebd6bd942"
+        - name: CATTLE_CLUSTER
+          value: "false"
+        - name: CATTLE_K8S_MANAGED
+          value: "true"
+        - name: CATTLE_AGENT_CONNECT
+          value: "true"
+        volumeMounts:
+        - name: cattle-credentials
+          mountPath: /cattle-credentials
+          readOnly: true
+        - name: k8s-ssl
+          mountPath: /etc/kubernetes
+        - name: var-run
+          mountPath: /var/run
+        - name: run
+          mountPath: /run
+        securityContext:
+          privileged: true
+      volumes:
+      - name: k8s-ssl
+        hostPath:
+          path: /etc/kubernetes
+          type: DirectoryOrCreate
+      - name: var-run
+        hostPath:
+          path: /var/run
+          type: DirectoryOrCreate
+      - name: run
+        hostPath:
+          path: /run
+          type: DirectoryOrCreate
+      - name: cattle-credentials
+        secret:
+          secretName: cattle-credentials-5b9b242
+  updateStrategy:
+    type: RollingUpdate
