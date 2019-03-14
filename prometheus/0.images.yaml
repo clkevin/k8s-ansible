@@ -1,0 +1,47 @@
+- hosts: k8s-nodes
+  tasks:
+    - name: pull prometheus images # 下载prometheus需要的镜像
+      shell: docker pull registry.cn-beijing.aliyuncs.com/kube_image/{{item.image}}
+      with_items:
+      - {image: 'configmap-reload:v0.0.1'}
+      - {image: 'alertmanager:v0.15.1'}
+      - {image: 'grafana:5.2.2'}
+      - {image: 'kube-state-metrics:v1.3.1'}
+      - {image: 'addon-resizer:1.7'}
+      - {image: 'node-exporter:v0.16.0'}
+      - {image: 'prometheus:v2.3.2'}
+      - {image: 'prometheus-config-reloader:v0.23.0'}
+      - {image: 'prometheus-operator:v0.23.1'}
+    - name: tag quay.io/coreos images 
+      shell: docker tag registry.cn-beijing.aliyuncs.com/kube_image/{{item.image}}  quay.io/coreos/{{item.image}}
+      with_items:
+      - {image: 'configmap-reload:v0.0.1'}
+      - {image: 'prometheus-config-reloader:v0.23.0'}
+      - {image: 'prometheus-operator:v0.23.1'}
+    - name: tag quay.io/prometheus/ images 
+      shell: docker tag registry.cn-beijing.aliyuncs.com/kube_image/{{item.image}}  quay.io/prometheus/{{item.image}}
+      with_items:
+      - {image: 'alertmanager:v0.15.1'}
+      - {image: 'node-exporter:v0.16.0'}
+      - {image: 'prometheus:v2.3.2'}
+    - name: tag k8s.gcr.io/ images 
+      shell: docker tag registry.cn-beijing.aliyuncs.com/kube_image/{{item.image}}  k8s.gcr.io/{{item.image}}
+      with_items:
+      - {image: 'kube-state-metrics:v1.3.1'}
+      - {image: 'addon-resizer:1.7'}
+    - name: tag docker.io/ images 
+      shell: docker tag registry.cn-beijing.aliyuncs.com/kube_image/{{item.image}}  docker.io/grafana/{{item.image}}
+      with_items:
+      - {image: 'grafana:5.2.2'}
+    - name: del prometheus images # 下载prometheus需要的镜像
+      shell: docker rmi registry.cn-beijing.aliyuncs.com/kube_image/{{item.image}}
+      with_items:
+      - {image: 'configmap-reload:v0.0.1'}
+      - {image: 'alertmanager:v0.15.1'}
+      - {image: 'grafana:5.2.2'}
+      - {image: 'kube-state-metrics:v1.3.1'}
+      - {image: 'addon-resizer:1.7'}
+      - {image: 'node-exporter:v0.16.0'}
+      - {image: 'prometheus:v2.3.2'}
+      - {image: 'prometheus-config-reloader:v0.23.0'}
+      - {image: 'prometheus-operator:v0.23.1'}
