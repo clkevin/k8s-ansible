@@ -28,7 +28,8 @@
     - name: download node binaries  #下载node节点的二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/node/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/node/{{ item.service }}
+        # url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/node/{{ item.service }}
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.9.8/{{ item.service }}
       with_items:
         - {service: 'kubectl'}
         - {service: 'kubelet'}

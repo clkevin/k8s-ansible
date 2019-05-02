@@ -13,6 +13,7 @@
       with_items:
         - {service: 'kubelet'}
         - {service: 'proxy'}
+        - {service: 'kube-config'}
     - name: install node binaries #安装二进制服务
       copy: 
         src: ~/k8s-ansible/binaries/node/{{item.service}}
