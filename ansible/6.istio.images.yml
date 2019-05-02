@@ -27,11 +27,11 @@
         - {service: 'all-in-one:1.9'}
         - {service: 'kiali:v0.16'}
     - name: tag images istio other images # 对istio所需的其它镜像重新tag
-      shell: docker tag registry.cn-beijing.aliyuncs.com/kube_image/{{item.service}}:{{item.version}}  docker.io/{{item.tagPrefix}}/{{item.service}}:{{item.version}}
+      shell: docker tag registry.cn-beijing.aliyuncs.com/kube_image/{{item.service}}:{{item.version}}  {{item.tagPrefix}}/{{item.service}}:{{item.version}}
       with_items:
-        - {service: 'grafana', version: '6.0.2', tagPrefix: 'docker.io/grafana/'}
-        - {service: 'all-in-one', version: '1.9', tagPrefix: 'docker.io/jaegertracing/'}
-        - {service: 'kiali', version: 'v0.16', tagPrefix: 'docker.io/kiali/'}
+        - {service: 'grafana', version: '6.0.2', tagPrefix: 'docker.io/grafana'}
+        - {service: 'all-in-one', version: '1.9', tagPrefix: 'docker.io/jaegertracing'}
+        - {service: 'kiali', version: 'v0.16', tagPrefix: 'docker.io/kiali'}
     - name: pull images istio prometheus  # 下载 prometheus
       shell:  docker pull registry.cn-beijing.aliyuncs.com/kevin-public/prometheus:v2.3.1
     - name: tag images istio prometheus # 对prometheus重新tag
