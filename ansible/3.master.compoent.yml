@@ -14,9 +14,9 @@
         path=~/.kube
         state=directory
     - name: make kubectl kubeconfig
-      shell: ~/kubeconfig.sh admin
+      shell: ~/kubeconfig.sh cluster-admin
     - name: cp kubectl config
-      shell: cp /opt/kubernetes/admin.kubeconfig ~/.kube/config
+      shell: cp /opt/kubernetes/conf/cluster-admin.kubeconfig ~/.kube/config
     - name: enable master service  # 开机自启动服务
       shell:  systemctl enable {{item.service}}.service
       with_items:
