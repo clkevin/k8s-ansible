@@ -46,7 +46,7 @@
         - {service: 'cfssljson'}
         - {service: 'cfssl-certinfo'}
     - name: chmod cfssl
-      shell: chmod +x {{ item.service }}
+      shell: chmod +x /usr/bin/{{ item.service }}
       with_items:
         - {service: 'cfssl'}
         - {service: 'cfssljson'}
@@ -55,3 +55,7 @@
       template:
         src: ~/k8s-ansible/template/server-csr.j2
         dest: ~/k8s-ansible/tls/server-csr.json
+    - name: exec init shell
+      shell: ~/k8s-ansible/bin/1.init.sh
+    - name: exec tls shell
+      shell: ~/k8s-ansible/bin/2.tls.sh

@@ -40,4 +40,4 @@ echo $token > ~/k8s-ansible/customer/token.csv
 
 
 ######## ansible hosts append host ips
-echo 'host_ips'$ips >> ~/k8s-ansible/customer/ansible-hosts
+echo 'host_ips='$ips >> ~/k8s-ansible/customer/ansible-hosts
