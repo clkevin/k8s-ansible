@@ -1,5 +1,9 @@
 - hosts: all
   tasks:
+    - name: install ntp
+      shell: yum install -y ntp
+    - name: ntp time
+      shell: ntpdate time.ntp.org
     - name: edit hostname  # 修改所有节点hostname
       template: 
         src: ~/k8s-ansible/template/hostname.j2
