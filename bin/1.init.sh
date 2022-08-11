@@ -32,4 +32,8 @@ echo $ips > ~/k8s-ansible/customer/hostips.csv
 
 ######## init token
 
-head -c 16 /dev/urandom | od -An -t x | tr -d ' ' > ~/k8s-ansible/customer/token.csv
+token=`head -c 16 /dev/urandom | od -An -t x | tr -d ' '`
+echo $token  > ~/k8s-ansible/customer/token
+
+token=$token',kubelet-bootstrap,10001,"system:node-bootstrapper"'
+echo $token > ~/k8s-ansible/customer/token.csv

@@ -11,15 +11,15 @@
     - name: download etcd binaries    #下载etcd二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/master/{{ item.service }}
+        url: https://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/master/{{ item.service }}
       with_items:
         - {service: 'etcd'}
         - {service: 'etcdctl'}
-
+        - {service: 'etcdutl'}
     - name: download master binaries  #下载master节点的二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/{{ item.service }}
+        url: https://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/master/{{ item.service }}
       with_items:
         - {service: 'kube-apiserver'}
         - {service: 'kube-controller-manager'}
@@ -28,8 +28,7 @@
     - name: download node binaries  #下载node节点的二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/node/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/{{ item.service }}
+        url: https://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/node/{{ item.service }}
       with_items:
-        - {service: 'kubectl'}
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
