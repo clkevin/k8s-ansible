@@ -1,16 +1,11 @@
-
-
 [Unit]
 Description=Kubernetes Controller Manager
-Documentation=https://github.com/GoogleCloudPlatform/kubernetes
-After=kube-apiserver.service
-Requires=kube-apiserver.service
+Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
-EnvironmentFile=/etc/kubernetes/controller-manager
-ExecStart=/usr/bin/kube-controller-manager $KUBE_CONTROLLER_MANAGER_ARGS
+EnvironmentFile=/opt/kubernetes/conf/kube-controller-manager.conf
+ExecStart=/usr/bin/kube-controller-manager $KUBE_CONTROLLER_MANAGER_OPTS
 Restart=on-failure
-LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target

@@ -8,6 +8,11 @@
       file:
         path=~/k8s-ansible/binaries/node
         state=directory
+    - name: make build dir binaries  #创建build二进制文
+件临时存储目录
+      file:
+        path=~/k8s-ansible/binaries/build
+        state=directory
     - name: download etcd binaries    #下载etcd二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
@@ -32,3 +37,21 @@
       with_items:
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
+    - name: download cfssl
+      get_url:
+        dest: /usr/bin/{{ item.service }}
+        url: https://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/build/{{ item.service }}_1.6.1_linux_amd64
+      with_items:
+        - {service: 'cfssl'}
+        - {service: 'cfssljson'}
+        - {service: 'cfssl-certinfo'}
+    - name: chmod cfssl
+      shell: chmod +x {{ item.service }}
+      with_items:
+        - {service: 'cfssl'}
+        - {service: 'cfssljson'}
+        - {service: 'cfssl-certinfo'}
+    - name: server csr
+      template:
+        src: ~/k8s-ansible/template/server-csr.j2
+        dest: ~/k8s-ansible/tls/server-csr.json

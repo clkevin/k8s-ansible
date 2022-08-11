@@ -1,0 +1,30 @@
+- hosts: k8s-masters
+  tasks: 
+    - name: produce master conf  # 生成 master服务配置文件
+      template: 
+        src: ~/k8s-ansible/template/kubeconfig.j2
+        dest: ~/kubeconfig.sh
+        mode: 744
+    - name: make controller manager kubeconfig
+      shell: ~/kubeconfig.sh kube-controller-manager
+    - name: make scheduler kubeconfig
+      shell: ~/kubeconfig.sh kube-scheduler
+    - name: enable master service  # 开机自启动服务
+      shell:  systemctl enable {{item.service}}.service
+      with_items:
+        - {service: 'kube-controller-manager'}
+        - {service: 'kube-scheduler'}
+    - name: start  master service  # 启动服务
+      shell:  systemctl start {{item.service}}.service
+      with_items:
+        - {service: 'kube-controller-manager'}
+        - {service: 'kube-scheduler'}
+
+
+
+
+
+
+
+
+

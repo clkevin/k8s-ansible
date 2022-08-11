@@ -1,5 +1,3 @@
-
-
 [Unit]
 Description=Etcd Server
 After=network.target
@@ -9,8 +7,7 @@ Type=simple
 # etcd 数据存储目录
 WorkingDirectory=/var/lib/etcd/
 EnvironmentFile=-/etc/etcd/etcd.conf
-#ExecStart=/usr/bin/etcd  --listen-client-urls=http://0.0.0.0:2379 --advertise-client-urls=http://0.0.0.0:2379 --listen-peer-urls=http://0.0.0.0:2380
-ExecStart=/usr/bin/etcd --listen-client-urls http://0.0.0.0:2379   --advertise-client-urls http://0.0.0.0:2379
+ExecStart=/usr/bin/etcd
 
 [Install]
 WantedBy=multi-user.target

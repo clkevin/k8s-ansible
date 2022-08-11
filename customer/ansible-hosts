@@ -16,6 +16,7 @@ k8s-node2 node_name=k8s-node2
 [all:vars]
 etcd_ip=10.0.2.11:2379
 service_cluster_cidr=169.169.0.0/16
+service_gateway=169.169.0.1
 api_server_ip=10.0.2.11
 dns_server_ip=169.169.0.2
 cluster_cidr=10.244.0.0/16
