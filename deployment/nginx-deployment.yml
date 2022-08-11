@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
@@ -29,5 +29,3 @@ spec:
           limits:
             cpu: 0.1
             memory: 32Mi
-      nodeSelector:
-        attach: b2c

@@ -8,13 +8,17 @@
       copy: 
         src: ~/k8s-ansible/customer/hosts
         dest: /etc/hosts
-    - name: mkdir conf dir /etc/kubernetes #所有节点创建k8s配置文件目录
+    - name: mkdir conf dir /opt/kubernetes/conf #所有节点创建k8s配置文件目录
       file:
-        path=/etc/kubernetes
+        path=/opt/kubernetes/conf
         state=directory
-    - name: mkdir log dir /var/log/kubernetes #所有节点创建k8slog目录
+    - name: mkdir conf dir /opt/kubernetes/ssl #所有节点创建k8s ssl目录
       file:
-        path=/var/log/kubernetes
+        path=/opt/kubernetes/ssl
+        state=directory
+    - name: mkdir conf dir /opt/kubernetes/logs #所有节点创建k8s logs目录
+      file:
+        path=/opt/kubernetes/logs
         state=directory
     - name: disable all nodes firewalld.service  #所有节点禁用防火墙
       shell: systemctl disable firewalld.service

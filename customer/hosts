@@ -1,7 +1,6 @@
 127.0.0.1   localhost localhost.localdomain
 
-10.254.0.62 k8s-master
-10.254.0.63 k8s-node1
-10.254.0.64 k8s-node2
-10.254.0.65 k8s-node3
+10.0.2.11 k8s-master
+10.0.2.10 k8s-node1
+10.0.2.12 k8s-node2
 

@@ -12,14 +12,12 @@ k8s-master  node_name=k8s-master
 [k8s-nodes]
 k8s-node1 node_name=k8s-node1
 k8s-node2 node_name=k8s-node2
-k8s-node3 node_name=k8s-node3
 
 [all:vars]
-etcd_ip=10.254.0.56
-#etcd_ip=127.0.0.1
-service_cluster_ip_range=169.169.0.0/16
-master_ip=10.254.0.56
-api_server_ip=10.254.0.56
-#node_name=k8s-master
+etcd_ip=10.0.2.11:2379
+service_cluster_cidr=169.169.0.0/16
+api_server_ip=10.0.2.11
 dns_server_ip=169.169.0.2
-dns_domain=cluster.local
+cluster_cidr=10.244.0.0/16
+
+

@@ -11,7 +11,7 @@
     - name: download etcd binaries    #下载etcd二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/master/{{ item.service }}
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/master/{{ item.service }}
       with_items:
         - {service: 'etcd'}
         - {service: 'etcdctl'}
@@ -19,7 +19,7 @@
     - name: download master binaries  #下载master节点的二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/master/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.9.8/{{ item.service }}
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/{{ item.service }}
       with_items:
         - {service: 'kube-apiserver'}
         - {service: 'kube-controller-manager'}
@@ -28,16 +28,8 @@
     - name: download node binaries  #下载node节点的二进制文件
       get_url: 
         dest: ~/k8s-ansible/binaries/node/{{ item.service }}
-        # url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.6.0/node/{{ item.service }}
-        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.9.8/{{ item.service }}
+        url: http://blog.liu-kevin.com/content/images/uploader/k8s/binaries/1.24.2/{{ item.service }}
       with_items:
         - {service: 'kubectl'}
         - {service: 'kubelet'}
         - {service: 'kube-proxy'}
-    - name: download flanneld binaries  #下载flanneld所的二进制文件
-      get_url:
-        url: http://blog.liu-kevin.com/content/images/uploader/fannel/v0.10.0/{{item.service}}
-        dest: ~/k8s-ansible/binaries/node/{{ item.service }}
-      with_items:
-        - { service: 'flanneld'}
-        - { service: 'mk-docker-opts.sh'} 
