@@ -1,10 +1,24 @@
 - hosts: k8s-masters
   tasks: 
     - name: produce master conf  # 生成 master服务配置文件
-      shell: kubectl certificate approve all 
-
-
-
-
+      shell: kubectl certificate approve all
+    - name: apiserver connect kubelet #授权apiserver访问kubelet
+      shell: kubectl apply -f ~/k8s-ansible/auth/apiserver-to-kubelet-rbac.yaml
+    - name: make calico yml
+      template:
+        src: ~/k8s-ansible/template/calico.yaml.j2
+        dest: ~/k8s-ansible/deployment/calico.yaml
+    - name: deploy calico
+      shell: kubectl apply -f ~/k8s-ansible/deployment/calico.yaml
+    - name: create dashboard secret
+      shell: kubectl create secret generic kubernetes-dashboard-certs -n kubernetes-dashboard --from-file=dashboard.crt=/opt/kubernetes/ssl/server.pem --from-file=dashboard.key=/opt/kubernetes/ssl/server-key.pem
+    - name: deploy dashboard
+      shell: kubectl apply -f ~/k8s-ansible/dashboard/dashboard.yaml
+    - name: deploy dashboard user
+      shell: kubectl apply -f ~/k8s-ansible/dashboard/dashboard-user.yaml
+    - name: dashboard token
+      shell: kubectl -n kubernetes-dashboard create token admin-user > ~/k8s-ansible/dashboard/dashboard-token 
+    - name: deploy coredns
+      shell: kubectl apply -f ~/k8s-ansible/dns/coredns.yaml
 
 
