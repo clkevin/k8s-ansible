@@ -1,17 +1,12 @@
-
-
 [Unit]
-Description=Kubernetes Kubelet Server
-Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+Description=Kubernetes Kubelet
 After=docker.service
-Requires=docker.service
 
 [Service]
-WorkingDirectory=/var/lib/kubelet
-EnvironmentFile=/etc/kubernetes/kubelet
-ExecStart=/usr/bin/kubelet $KUBELET_ARGS
+EnvironmentFile=/opt/kubernetes/conf/kubelet.conf
+ExecStart=/usr/bin/kubelet $KUBELET_OPTS
 Restart=on-failure
+LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target
-

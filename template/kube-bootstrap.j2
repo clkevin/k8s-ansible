@@ -1,0 +1,15 @@
+#!/bin/bash
+
+kubectl config set-cluster kubernetes \
+  --certificate-authority=/opt/kubernetes/ssl/ca.pem \
+  --embed-certs=true \
+  --server=https://{{api_server_ip}}:6443 \
+  --kubeconfig=/opt/kubernetes/conf/$1.kubeconfig
+kubectl config set-credentials $1 \
+  --token={{token}} \
+  --kubeconfig=/opt/kubernetes/conf/$1.kubeconfig
+kubectl config set-context default \
+  --cluster=kubernetes \
+  --user=$1 \
+  --kubeconfig=/opt/kubernetes/conf/$1.kubeconfig
+kubectl config use-context default --kubeconfig=/opt/kubernetes/conf/$1.kubeconfig

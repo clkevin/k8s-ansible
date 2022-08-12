@@ -1,0 +1,10 @@
+- hosts: k8s-masters
+  tasks: 
+    - name: produce master conf  # 生成 master服务配置文件
+      shell: kubectl certificate approve all 
+
+
+
+
+
+

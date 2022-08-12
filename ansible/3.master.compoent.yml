@@ -3,12 +3,12 @@
     - name: produce master conf  # 生成 master服务配置文件
       template: 
         src: ~/k8s-ansible/template/kubeconfig.j2
-        dest: ~/kubeconfig.sh
+        dest: ~/k8s-ansible/bin/kubeconfig.sh
         mode: 744
     - name: make controller manager kubeconfig
       shell: ~/kubeconfig.sh kube-controller-manager
     - name: make scheduler kubeconfig
-      shell: ~/kubeconfig.sh kube-scheduler
+      shell: ~/k8s-ansible/bin/kubeconfig.sh kube-scheduler
     - name: mkdir .kube
       file:
         path=~/.kube
@@ -29,8 +29,15 @@
         - {service: 'kube-scheduler'}
     - name: kubelet bootstrap
       shell: kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap
-
-
+    - name: make kubelet bootstrp config shell
+      template:
+        src: ~/k8s-ansible/template/kube-bootstrap.j2
+        dest: ~/k8s-ansible/bin/kube-bootstrap.sh
+        mode: 744
+    - name: exec kube bootstrap shell
+      shell: ~/k8s-ansible/bin/kube-bootstrap.sh  kubelet-bootstrap
+    - name: kube proxy kubeconfig
+      shell: ~/k8s-ansible/bin/kubeconfig.sh kube-proxy
 
 
 
