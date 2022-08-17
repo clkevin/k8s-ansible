@@ -1,6 +1,4 @@
 - hosts: k8s-build
   tasks:
-    - name: cp hasible hosts  #创建master二进制文件临时存储目录
-      shell: cp ~/k8s-ansible/customer/ansible-hosts /etc/ansible/hosts
     - name: exec init shell
       shell: ~/k8s-ansible/bin/1.init.sh
