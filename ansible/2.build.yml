@@ -1,5 +1,7 @@
 - hosts: k8s-build
   tasks: 
+#    - name: exec init shell
+#      shell: ~/k8s-ansible/bin/1.init.sh
     - name: make master dir binaries  #创建master二进制文件临时存储目录
       file:
         path=~/k8s-ansible/binaries/master
@@ -8,8 +10,7 @@
       file:
         path=~/k8s-ansible/binaries/node
         state=directory
-    - name: make build dir binaries  #创建build二进制文
-件临时存储目录
+    - name: make build dir binaries  #创建build二进制文件临时存储目录
       file:
         path=~/k8s-ansible/binaries/build
         state=directory

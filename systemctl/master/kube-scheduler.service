@@ -3,7 +3,7 @@ Description=Kubernetes Scheduler
 Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
-EnvironmentFile=/opt/kubernetes/conf/kube-scheduler.conf
+EnvironmentFile=/opt/kubernetes/conf/scheduler
 ExecStart=/usr/bin/kube-scheduler $KUBE_SCHEDULER_OPTS
 Restart=on-failure
 

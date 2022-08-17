@@ -6,7 +6,7 @@
         dest: ~/k8s-ansible/bin/kubeconfig.sh
         mode: 744
     - name: make controller manager kubeconfig
-      shell: ~/kubeconfig.sh kube-controller-manager
+      shell: ~/k8s-ansible/bin/kubeconfig.sh kube-controller-manager
     - name: make scheduler kubeconfig
       shell: ~/k8s-ansible/bin/kubeconfig.sh kube-scheduler
     - name: mkdir .kube
@@ -14,7 +14,7 @@
         path=~/.kube
         state=directory
     - name: make kubectl kubeconfig
-      shell: ~/kubeconfig.sh cluster-admin
+      shell: ~/k8s-ansible/bin/kubeconfig.sh cluster-admin
     - name: cp kubectl config
       shell: cp /opt/kubernetes/conf/cluster-admin.kubeconfig ~/.kube/config
     - name: enable master service  # 开机自启动服务
