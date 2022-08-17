@@ -19,6 +19,8 @@
         - {service: 'kube-controller-manager-key.pem'}
         - {service: 'admin.pem'}
         - {service: 'admin-key.pem'}
+        - {service: 'kube-proxy.pem'}
+        - {service: 'kube-proxy-key.pem'}
     - name: cp token
       copy:
         src: ~/k8s-ansible/customer/token.csv
