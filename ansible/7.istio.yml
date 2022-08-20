@@ -1,0 +1,10 @@
+- hosts: k8s-masters
+  tasks:
+    - name: download istio
+      get_url:
+        url: https://blog.liu-kevin.com/content/images/uploader/k8s/istio/1.14.3/istioctl
+        dest: /usr/bin/istioctl
+    - name: install istio
+      shell: istioctl install --set profile=demo
+    - name: ns default enabled injection
+      shell: kubectl label namespace default istio-injection=enabled
